@@ -1,24 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Tracking Lab</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Educational Tracking Lab</title>
+</head>
+
+<body>
+
     <h1>Educational Tracking Lab</h1>
-    <p>This page demonstrates what normal web requests can reveal.</p>
+
+    <p>
+        This page demonstrates information normally available
+        to a website through a browser request.
+    </p>
 
     <script>
-      fetch("/browser-info", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          screen: `${screen.width}x${screen.height}`,
-          language: navigator.language,
-          platform: navigator.platform,
-        }),
-      });
+        fetch("/browser-info", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                screen: `${screen.width}x${screen.height}`,
+                language: navigator.language,
+                platform: navigator.platform
+            })
+        });
     </script>
-  </body>
+
+</body>
 </html>
