@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static("public"));
 
-// This route MUST run first when /track is opened
 app.get("/track", (req, res) => {
     const visit = {
         id: crypto.randomUUID(),
@@ -25,7 +24,29 @@ app.get("/track", (req, res) => {
     console.log("REFERER:", visit.referer);
     console.log("=================================\n");
 
-    res.redirect("/");
+    res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Educational Tracking Lab</title>
+        </head>
+        <body>
+            <h1>Educational Tracking Lab</h1>
+
+            <p>Visit recorded for this educational demonstration.</p>
+
+            <p><strong>Visit ID:</strong> ${visit.id}</p>
+            <p><strong>Time:</strong> ${visit.time}</p>
+            <p><strong>Browser:</strong> ${visit.userAgent}</p>
+
+            <p>
+                No password, cookie, GPS location, camera,
+                microphone, or personal files are collected.
+            </p>
+        </body>
+        </html>
+    `);
 });
 
 app.post("/browser-info", (req, res) => {
